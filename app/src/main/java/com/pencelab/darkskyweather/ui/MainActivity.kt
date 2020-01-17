@@ -1,7 +1,8 @@
-package com.pencelab.darkskyweather
+package com.pencelab.darkskyweather.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pencelab.darkskyweather.R
 
 class MainActivity : AppCompatActivity() {
 
