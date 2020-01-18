@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="layout_padding">8dp</dimen>
+
+    <dimen name="text_h1">24sp</dimen>
+    <dimen name="text_h2">16sp</dimen>
+    <dimen name="text_highlighted">64sp</dimen>
+
+    <dimen name="icon_height">120dp</dimen>
+
+</resources>

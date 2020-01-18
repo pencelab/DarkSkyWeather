@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DarkSkyWeather</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="data_latitude">Lat: %s</string>
+    <string name="data_longitude">Long: %s</string>
+    <string name="data_degrees">%d°</string>
+    <string name="go">Go</string>
+    <string name="weather_icon_description">Weather Icon</string>
 </resources>
