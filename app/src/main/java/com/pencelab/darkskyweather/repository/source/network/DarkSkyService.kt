@@ -1,11 +1,11 @@
 package com.pencelab.darkskyweather.repository.source.network
 
-import com.pencelab.darkskyweather.repository.model.WeatherResponse
+import com.pencelab.darkskyweather.repository.model.DarkSkyResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface WeatherService {
+interface DarkSkyService {
 
     @GET("forecast/{key}/{latitude},{longitude}")
     suspend fun getCurrentWeather(
@@ -14,6 +14,6 @@ interface WeatherService {
         @Path(value = "longitude", encoded = false) longitude: String,
         @Query("exclude") exclude: String = "minutely,hourly,daily,alerts,flags",
         @Query("units") units: String = "auto"
-    ): WeatherResponse
+    ): DarkSkyResponse
 
 }

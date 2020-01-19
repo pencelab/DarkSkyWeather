@@ -1,6 +1,6 @@
 package com.pencelab.darkskyweather.repository.model
 
-data class WeatherResponse(
+data class DarkSkyResponse(
     val timezone: String,
     val latitude: Double,
     val longitude: Double,

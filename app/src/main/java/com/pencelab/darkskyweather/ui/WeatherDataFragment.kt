@@ -14,6 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.pencelab.darkskyweather.R
 import com.pencelab.darkskyweather.business.WeatherViewModel
+import com.pencelab.darkskyweather.repository.model.WeatherResult
+import com.pencelab.darkskyweather.repository.model.WeatherError
+import com.pencelab.darkskyweather.repository.model.WeatherLoading
 import com.pencelab.darkskyweather.utils.Injector
 
 class WeatherDataFragment : Fragment() {
@@ -26,9 +29,11 @@ class WeatherDataFragment : Fragment() {
     private lateinit var summary: TextView
     private lateinit var temperature: TextView
     private lateinit var spinner: ProgressBar
+    private lateinit var errorIcon: ImageView
+    private lateinit var error: TextView
 
     private val weatherViewModel: WeatherViewModel by viewModels({requireActivity()}) {
-        Injector.provideWeatherViewModelFactory(requireActivity())
+        Injector.provideWeatherViewModelFactory()
     }
 
     override fun onCreateView(
@@ -46,6 +51,8 @@ class WeatherDataFragment : Fragment() {
         this.summary = view.findViewById(R.id.textView_data_summary)
         this.temperature = view.findViewById(R.id.textView_data_temperature)
         this.spinner = view.findViewById(R.id.progressBar_data_spinner)
+        this.errorIcon = view.findViewById(R.id.imageView_error_icon)
+        this.error = view.findViewById(R.id.textView_error_message)
 
         this.subscribeUi()
 
@@ -53,30 +60,79 @@ class WeatherDataFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        weatherViewModel.spinner.observe(viewLifecycleOwner) { show ->
-            if(show) {
-                location.visibility = View.GONE
-                latitude.visibility = View.GONE
-                longitude.visibility = View.GONE
-                mainInfoLayout.visibility = View.GONE
-                spinner.visibility = View.VISIBLE
-            } else {
-                spinner.visibility = View.GONE
-                location.visibility = View.VISIBLE
-                latitude.visibility = View.VISIBLE
-                longitude.visibility = View.VISIBLE
-                mainInfoLayout.visibility = View.VISIBLE
+        weatherViewModel.weather.observe(viewLifecycleOwner) { weather ->
+            when(weather) {
+                is WeatherResult -> setResponseReceivedState(weather)
+                is WeatherError -> setErrorState(weather)
+                is WeatherLoading -> setLoadingState()
             }
         }
+    }
 
-        weatherViewModel.weather.observe(viewLifecycleOwner) { weather ->
-            location.text = weather.location
-            latitude.text = getString(R.string.data_latitude, weather.latitude.toString())
-            longitude.text = getString(R.string.data_longitude, weather.longitude.toString())
-            temperature.text = getString(R.string.data_degrees, weather.temperature)
-            summary.text = weather.summary
-            log(weather.iconUrl)
+    private fun setResponseReceivedState(weather: WeatherResult) {
+        location.text = weather.location
+        latitude.text = getString(R.string.data_latitude, weather.latitude.toString())
+        longitude.text = getString(R.string.data_longitude, weather.longitude.toString())
+        temperature.text = getString(R.string.data_degrees, weather.temperature)
+        summary.text = weather.summary
+
+        try {
+            val id = context!!.resources.getIdentifier(weather.icon.replace('-', '_'), "string", context!!.packageName)
+            log(getString(id))
+        } catch (e: Exception) {
+            log(getString(R.string.def))
         }
+
+        this.hideLoadingStateWidgets()
+        this.hideErrorStateWidgets()
+        this.showResponseReceivedWidgets()
+    }
+
+    private fun setErrorState(weather: WeatherError) {
+        if(weather.message != null)
+            this.error.text = weather.message
+
+        this.hideLoadingStateWidgets()
+        this.hideResponseReceivedWidgets()
+        this.showErrorStateWidgets()
+    }
+
+    private fun setLoadingState() {
+        this.hideErrorStateWidgets()
+        this.hideResponseReceivedWidgets()
+        this.showLoadingStateWidgets()
+    }
+
+    private fun showResponseReceivedWidgets() {
+        location.visibility = View.VISIBLE
+        latitude.visibility = View.VISIBLE
+        longitude.visibility = View.VISIBLE
+        mainInfoLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideResponseReceivedWidgets() {
+        location.visibility = View.GONE
+        latitude.visibility = View.GONE
+        longitude.visibility = View.GONE
+        mainInfoLayout.visibility = View.GONE
+    }
+
+    private fun showLoadingStateWidgets() {
+        this.spinner.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingStateWidgets() {
+        this.spinner.visibility = View.GONE
+    }
+
+    private fun showErrorStateWidgets() {
+        this.errorIcon.visibility = View.VISIBLE
+        this.error.visibility = View.VISIBLE
+    }
+
+    private fun hideErrorStateWidgets() {
+        this.errorIcon.visibility = View.GONE
+        this.error.visibility = View.GONE
     }
 
     private fun log(message: String) {

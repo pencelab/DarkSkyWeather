@@ -1,6 +1,6 @@
 package com.pencelab.darkskyweather.repository.source.network
 
-import com.pencelab.darkskyweather.repository.model.WeatherResponse
+import com.pencelab.darkskyweather.repository.model.DarkSkyResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -15,9 +15,9 @@ class NetworkService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val weatherService = retrofit.create(WeatherService::class.java)
+    private val weatherService = retrofit.create(DarkSkyService::class.java)
 
-    suspend fun getCurrentWeather(key: String, latitude: String, longitude: String): WeatherResponse = withContext(Dispatchers.Default) {
+    suspend fun getCurrentWeather(key: String, latitude: String, longitude: String): DarkSkyResponse = withContext(Dispatchers.Default) {
         weatherService.getCurrentWeather(key, latitude, longitude)
     }
 

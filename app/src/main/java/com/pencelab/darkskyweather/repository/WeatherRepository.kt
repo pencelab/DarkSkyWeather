@@ -1,7 +1,7 @@
 package com.pencelab.darkskyweather.repository
 
 import com.pencelab.darkskyweather.repository.source.network.NetworkService
-import com.pencelab.darkskyweather.repository.model.WeatherResponse
+import com.pencelab.darkskyweather.repository.model.DarkSkyResponse
 import com.pencelab.darkskyweather.utils.DefaultDispatcherProvider
 import com.pencelab.darkskyweather.utils.DispatcherProvider
 
@@ -24,6 +24,6 @@ class WeatherRepository constructor(
         key: String,
         latitude: String,
         longitude: String
-    ): WeatherResponse = this.weatherService.getCurrentWeather(key, latitude, longitude)
+    ): DarkSkyResponse = this.weatherService.getCurrentWeather(key, latitude, longitude)
 
 }

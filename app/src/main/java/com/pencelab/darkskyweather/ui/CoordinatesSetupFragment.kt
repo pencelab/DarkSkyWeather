@@ -20,7 +20,7 @@ class CoordinatesSetupFragment : Fragment() {
     private lateinit var goButton: Button
 
     private val weatherViewModel: WeatherViewModel by viewModels({requireActivity()}) {
-        Injector.provideWeatherViewModelFactory(requireActivity())
+        Injector.provideWeatherViewModelFactory()
     }
 
     override fun onCreateView(
