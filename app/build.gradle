@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -30,10 +32,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 ext {
     coroutines_android_version = "1.3.0"
+    glide_version = '4.10.0'
     gson_version = '2.8.6'
     lifecycle_version = '2.1.0'
     livedata_version = '2.2.0-rc03'
@@ -69,5 +76,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
+    //Scalable vector graphics for Android
+    implementation 'com.pixplicity.sharp:library:1.1.0'
 
 }

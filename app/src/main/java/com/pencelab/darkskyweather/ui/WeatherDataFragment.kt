@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.pencelab.darkskyweather.R
 import com.pencelab.darkskyweather.business.WeatherViewModel
+import com.pencelab.darkskyweather.databinding.FragmentWeatherDataBinding
 import com.pencelab.darkskyweather.repository.model.WeatherResult
 import com.pencelab.darkskyweather.repository.model.WeatherError
 import com.pencelab.darkskyweather.repository.model.WeatherLoading
@@ -21,16 +17,7 @@ import com.pencelab.darkskyweather.utils.Injector
 
 class WeatherDataFragment : Fragment() {
 
-    private lateinit var mainInfoLayout: ConstraintLayout
-    private lateinit var location: TextView
-    private lateinit var latitude: TextView
-    private lateinit var longitude: TextView
-    private lateinit var icon: ImageView
-    private lateinit var summary: TextView
-    private lateinit var temperature: TextView
-    private lateinit var spinner: ProgressBar
-    private lateinit var errorIcon: ImageView
-    private lateinit var error: TextView
+    private lateinit var binding: FragmentWeatherDataBinding
 
     private val weatherViewModel: WeatherViewModel by viewModels({requireActivity()}) {
         Injector.provideWeatherViewModelFactory()
@@ -40,58 +27,37 @@ class WeatherDataFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_weather_data, container, false)
-
-        this.mainInfoLayout = view.findViewById(R.id.layout_main_info)
-        this.location = view.findViewById(R.id.textView_data_location)
-        this.latitude = view.findViewById(R.id.textView_data_latitude)
-        this.longitude = view.findViewById(R.id.textView_data_longitude)
-        this.icon = view.findViewById(R.id.imageView_data_icon)
-        this.summary = view.findViewById(R.id.textView_data_summary)
-        this.temperature = view.findViewById(R.id.textView_data_temperature)
-        this.spinner = view.findViewById(R.id.progressBar_data_spinner)
-        this.errorIcon = view.findViewById(R.id.imageView_error_icon)
-        this.error = view.findViewById(R.id.textView_error_message)
+        binding = FragmentWeatherDataBinding.inflate(inflater, container, false)
+        context ?: return binding.root
 
         this.subscribeUi()
 
-        return view
+        return binding.root
     }
 
     private fun subscribeUi() {
-        weatherViewModel.weather.observe(viewLifecycleOwner) { weather ->
-            when(weather) {
-                is WeatherResult -> setResponseReceivedState(weather)
-                is WeatherError -> setErrorState(weather)
+        weatherViewModel.weather.observe(viewLifecycleOwner) { weatherRequestState ->
+            when(weatherRequestState) {
+                is WeatherResult -> {
+                    binding.weatherResult = weatherRequestState
+                    setResponseReceivedState()
+                }
+                is WeatherError -> {
+                    binding.weatherError = weatherRequestState
+                    setErrorState()
+                }
                 is WeatherLoading -> setLoadingState()
             }
         }
     }
 
-    private fun setResponseReceivedState(weather: WeatherResult) {
-        location.text = weather.location
-        latitude.text = getString(R.string.data_latitude, weather.latitude.toString())
-        longitude.text = getString(R.string.data_longitude, weather.longitude.toString())
-        temperature.text = getString(R.string.data_degrees, weather.temperature)
-        summary.text = weather.summary
-
-        try {
-            val id = context!!.resources.getIdentifier(weather.icon.replace('-', '_'), "string", context!!.packageName)
-            log(getString(id))
-        } catch (e: Exception) {
-            log(getString(R.string.def))
-        }
-
+    private fun setResponseReceivedState() {
         this.hideLoadingStateWidgets()
         this.hideErrorStateWidgets()
         this.showResponseReceivedWidgets()
     }
 
-    private fun setErrorState(weather: WeatherError) {
-        if(weather.message != null)
-            this.error.text = weather.message
-
+    private fun setErrorState() {
         this.hideLoadingStateWidgets()
         this.hideResponseReceivedWidgets()
         this.showErrorStateWidgets()
@@ -104,35 +70,35 @@ class WeatherDataFragment : Fragment() {
     }
 
     private fun showResponseReceivedWidgets() {
-        location.visibility = View.VISIBLE
-        latitude.visibility = View.VISIBLE
-        longitude.visibility = View.VISIBLE
-        mainInfoLayout.visibility = View.VISIBLE
+        this.binding.textViewDataLocation.visibility = View.VISIBLE
+        this.binding.textViewDataLatitude.visibility = View.VISIBLE
+        this.binding.textViewDataLongitude.visibility = View.VISIBLE
+        this.binding.layoutMainInfo.visibility = View.VISIBLE
     }
 
     private fun hideResponseReceivedWidgets() {
-        location.visibility = View.GONE
-        latitude.visibility = View.GONE
-        longitude.visibility = View.GONE
-        mainInfoLayout.visibility = View.GONE
+        this.binding.textViewDataLocation.visibility = View.GONE
+        this.binding.textViewDataLatitude.visibility = View.GONE
+        this.binding.textViewDataLongitude.visibility = View.GONE
+        this.binding.layoutMainInfo.visibility = View.GONE
     }
 
     private fun showLoadingStateWidgets() {
-        this.spinner.visibility = View.VISIBLE
+        this.binding.progressBarDataSpinner.visibility = View.VISIBLE
     }
 
     private fun hideLoadingStateWidgets() {
-        this.spinner.visibility = View.GONE
+        this.binding.progressBarDataSpinner.visibility = View.GONE
     }
 
     private fun showErrorStateWidgets() {
-        this.errorIcon.visibility = View.VISIBLE
-        this.error.visibility = View.VISIBLE
+        this.binding.imageViewErrorIcon.visibility = View.VISIBLE
+        this.binding.textViewErrorMessage.visibility = View.VISIBLE
     }
 
     private fun hideErrorStateWidgets() {
-        this.errorIcon.visibility = View.GONE
-        this.error.visibility = View.GONE
+        this.binding.imageViewErrorIcon.visibility = View.GONE
+        this.binding.textViewErrorMessage.visibility = View.GONE
     }
 
     private fun log(message: String) {

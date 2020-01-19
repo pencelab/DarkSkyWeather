@@ -1,148 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/layout_padding"
-    tools:context=".ui.WeatherDataFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_middle_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+    <data>
+        <variable
+            name="weatherResult"
+            type="com.pencelab.darkskyweather.repository.model.WeatherResult"/>
 
-    <TextView
-        android:id="@+id/textView_data_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_h1"
-        android:textColor="@color/text_h1"
-        android:text="Location"
-        android:layout_margin="@dimen/widget_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_data_latitude"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/widget_margin"
-        android:text="@string/data_latitude"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_h2"
-        app:layout_constraintEnd_toStartOf="@+id/guide_middle_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_data_location" />
-
-    <TextView
-        android:id="@+id/textView_data_longitude"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/widget_margin"
-        android:text="@string/data_longitude"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_h2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guide_middle_vertical"
-        app:layout_constraintTop_toBottomOf="@id/textView_data_location" />
+        <variable
+            name="weatherError"
+            type="com.pencelab.darkskyweather.repository.model.WeatherError"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textView_data_latitude">
+        android:padding="@dimen/layout_padding"
+        tools:context=".ui.WeatherDataFragment">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_status_middle_vertical"
+            android:id="@+id/guide_middle_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <ImageView
-            android:id="@+id/imageView_data_icon"
+        <TextView
+            android:id="@+id/textView_data_location"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_h1"
+            android:textColor="@color/text_h1"
+            android:text="@{weatherResult.location}"
+            android:layout_margin="@dimen/widget_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_data_latitude"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/widget_margin"
+            android:text="@{String.format(@string/data_latitude, weatherResult.latitude)}"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_h2"
+            app:layout_constraintEnd_toStartOf="@+id/guide_middle_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_data_location" />
+
+        <TextView
+            android:id="@+id/textView_data_longitude"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/widget_margin"
+            android:text="@{String.format(@string/data_longitude, weatherResult.longitude)}"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_h2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guide_middle_vertical"
+            app:layout_constraintTop_toBottomOf="@id/textView_data_location" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_main_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView_data_latitude">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_status_middle_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/imageView_data_icon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/icon_height"
+                android:layout_margin="@dimen/widget_margin"
+                app:icon="@{weatherResult.icon}"
+                app:layout_constraintBottom_toTopOf="@+id/textView_data_summary"
+                app:layout_constraintEnd_toStartOf="@+id/guide_status_middle_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/weather_icon_description" />
+
+            <TextView
+                android:id="@+id/textView_data_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_h2"
+                android:layout_margin="@dimen/widget_margin"
+                android:textAlignment="center"
+                android:text="@{weatherResult.summary}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guide_status_middle_vertical"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_data_temperature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/widget_margin"
+                android:text="@{String.format(@string/data_degrees, weatherResult.temperature)}"
+                android:textAlignment="center"
+                android:textColor="@color/text_h1"
+                android:textSize="@dimen/text_highlighted"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guide_status_middle_vertical"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar_data_spinner"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="bottom|end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imageView_error_icon"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/icon_height"
             android:layout_margin="@dimen/widget_margin"
-            android:src="@drawable/wi_alien"
-            app:layout_constraintBottom_toTopOf="@+id/textView_data_summary"
-            app:layout_constraintEnd_toStartOf="@+id/guide_status_middle_vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_error"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/weather_icon_description" />
-
-        <TextView
-            android:id="@+id/textView_data_summary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_h2"
-            android:layout_margin="@dimen/widget_margin"
-            android:textAlignment="center"
-            android:text="Summary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guide_status_middle_vertical"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_data_temperature"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/widget_margin"
-            android:text="@string/data_degrees"
-            android:textAlignment="center"
-            android:textColor="@color/text_h1"
-            android:textSize="@dimen/text_highlighted"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guide_status_middle_vertical"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/textView_error_message"/>
+
+        <TextView
+            android:id="@+id/textView_error_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/widget_margin"
+            android:text="@{weatherError.message ?? @string/error_message}"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_h1"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar_data_spinner"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="bottom|end"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <ImageView
-        android:id="@+id/imageView_error_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/icon_height"
-        android:layout_margin="@dimen/widget_margin"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_error"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textView_error_message"/>
-
-    <TextView
-        android:id="@+id/textView_error_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/widget_margin"
-        android:text="@string/error_message"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_h1"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

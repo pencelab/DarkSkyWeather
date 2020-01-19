@@ -13,4 +13,4 @@ data class WeatherResult(
 
 data class WeatherError(val message: String?) : WeatherRequestState()
 
-class WeatherLoading: WeatherRequestState()
+object WeatherLoading : WeatherRequestState()

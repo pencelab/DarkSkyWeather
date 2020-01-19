@@ -25,7 +25,7 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
     }
 
     fun loadCurrentWeather(latitude: String, longitude: String) = viewModelScope.launch {
-        _weather.value = WeatherLoading()
+        _weather.value = WeatherLoading
 
         val result = try {
             val weatherResponse = weatherRepository.fetchCurrentWeather(DARKSKY_API_KEY, latitude, longitude)

@@ -11,22 +11,22 @@
 
     <!--
         ICON URLs
-        WARNING: String name does allow dashes (-) therefore it was replaced by a underscore (_).
+        WARNING: String name does not allow dashes (-) therefore it was replaced by a underscore (_).
         Remember to search for this resource replacing dashes with underscores.
     -->
-    <string name="clear_day" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-day-sunny.svg</string>
-    <string name="clear_night" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-night-clear.svg</string>
-    <string name="rain" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-rain.svg</string>
-    <string name="snow" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-snow.svg</string>
-    <string name="sleet" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-sleet.svg</string>
-    <string name="wind" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-windy.svg</string>
-    <string name="fog" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-fog.svg</string>
-    <string name="cloudy" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-cloudy.svg</string>
-    <string name="partly_cloudy_day" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-day-cloudy.svg</string>
-    <string name="partly_cloudy_night" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-night-partly-cloudy.svg</string>
-    <string name="hail" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-hail.svg</string>
-    <string name="thunderstorm" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-thunderstorm.svg</string>
-    <string name="tornado" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-tornado.svg</string>
-    <string name="def" translatable="false">https://github.com/erikflowers/weather-icons/blob/master/svg/wi-alien.svg</string>
+    <string name="clear_day" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-day-sunny.svg?sanitize=true</string>
+    <string name="clear_night" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-night-clear.svg?sanitize=true</string>
+    <string name="rain" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-rain.svg?sanitize=true</string>
+    <string name="snow" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-snow.svg?sanitize=true</string>
+    <string name="sleet" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-sleet.svg?sanitize=true</string>
+    <string name="wind" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-windy.svg?sanitize=true</string>
+    <string name="fog" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-fog.svg?sanitize=true</string>
+    <string name="cloudy" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-cloudy.svg?sanitize=true</string>
+    <string name="partly_cloudy_day" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-day-cloudy.svg?sanitize=true</string>
+    <string name="partly_cloudy_night" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-night-partly-cloudy.svg?sanitize=true</string>
+    <string name="hail" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-hail.svg?sanitize=true</string>
+    <string name="thunderstorm" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-thunderstorm.svg?sanitize=true</string>
+    <string name="tornado" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-tornado.svg?sanitize=true</string>
+    <string name="def" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-alien.svg?sanitize=true</string>
 
 </resources>
