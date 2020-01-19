@@ -4,9 +4,10 @@
     <string name="longitude">Longitude</string>
     <string name="data_latitude">Lat: %s</string>
     <string name="data_longitude">Long: %s</string>
-    <string name="data_degrees">%d°</string>
+    <string name="data_degrees">%s°</string>
     <string name="go">Go</string>
     <string name="weather_icon_description">Weather Icon</string>
+    <string name="error_icon_description">Error</string>
     <string name="error_message">Error found. Please verify the values entered and try again.</string>
 
     <!--

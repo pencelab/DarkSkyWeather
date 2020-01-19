@@ -20,5 +20,4 @@ fun bindIconUrl(view: ImageView, icon: String?) {
         val request: Request = Request.Builder().url(iconUrl).build()
         view.setRemoteImageResource(request, onFailure)
     }
-
 }

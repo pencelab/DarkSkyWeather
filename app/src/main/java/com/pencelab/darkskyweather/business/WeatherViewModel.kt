@@ -3,10 +3,7 @@ package com.pencelab.darkskyweather.business
 import android.util.Log
 import androidx.lifecycle.*
 import com.pencelab.darkskyweather.repository.WeatherRepository
-import com.pencelab.darkskyweather.repository.model.WeatherResult
-import com.pencelab.darkskyweather.repository.model.WeatherError
-import com.pencelab.darkskyweather.repository.model.WeatherLoading
-import com.pencelab.darkskyweather.repository.model.WeatherRequestState
+import com.pencelab.darkskyweather.repository.model.*
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -33,9 +30,9 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
                 weatherResponse.timezone,
                 weatherResponse.latitude,
                 weatherResponse.longitude,
-                weatherResponse.currently.temperature.roundToInt(),
-                weatherResponse.currently.summary,
-                weatherResponse.currently.icon
+                weatherResponse.currently?.temperature?.roundToInt()?.toString() ?: "?",
+                weatherResponse.currently?.summary ?: "",
+                weatherResponse.currently?.icon ?: "def"
             )
         } catch(e: Exception) {
             WeatherError(e.message)

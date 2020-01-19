@@ -6,9 +6,9 @@ data class WeatherResult(
     val location: String,
     val latitude: Double,
     val longitude: Double,
-    val temperature: Int,
+    val temperature: String,
     val summary: String,
-    val icon: String = "def"
+    val icon: String
 ) : WeatherRequestState()
 
 data class WeatherError(val message: String?) : WeatherRequestState()
