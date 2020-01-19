@@ -9,6 +9,10 @@
     <string name="weather_icon_description">Weather Icon</string>
     <string name="error_icon_description">Error</string>
     <string name="error_message">Error found. Please verify the values entered and try again.</string>
+    <string name="autocomplete_error_message">Autocomplete returned with an error.</string>
+
+    <string name="initial_latitude" translatable="false">9.922756</string>
+    <string name="initial_longitude" translatable="false">-84.055824</string>
 
     <!--
         ICON URLs
@@ -28,6 +32,6 @@
     <string name="hail" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-hail.svg?sanitize=true</string>
     <string name="thunderstorm" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-thunderstorm.svg?sanitize=true</string>
     <string name="tornado" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-tornado.svg?sanitize=true</string>
-    <string name="def" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-alien.svg?sanitize=true</string>
+    <string name="def" translatable="false">https://raw.githubusercontent.com/erikflowers/weather-icons/master/svg/wi-thermometer.svg?sanitize=true</string>
 
 </resources>

@@ -17,6 +17,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildscript {
+        repositories {
+            google()
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,12 +36,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
     dataBinding {
         enabled = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -77,5 +84,8 @@ dependencies {
 
     //Scalable vector graphics for Android
     implementation 'com.pixplicity.sharp:library:1.1.0'
+
+    //Google Places SDK for Android
+    implementation 'com.google.android.libraries.places:places:2.1.0'
 
 }

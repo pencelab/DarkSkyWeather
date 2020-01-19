@@ -17,17 +17,13 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
     val weather: LiveData<WeatherRequestState>
         get() = _weather
 
-    init {
-        loadCurrentWeather(getCurrentLatitude(), getCurrentLongitude())
-    }
-
     fun loadCurrentWeather(latitude: String, longitude: String) = viewModelScope.launch {
         _weather.value = WeatherLoading
 
         val result = try {
             val weatherResponse = weatherRepository.fetchCurrentWeather(DARKSKY_API_KEY, latitude, longitude)
             WeatherResult(
-                weatherResponse.timezone,
+                weatherResponse.timezone.split('/').last().replace('_',' '),
                 weatherResponse.latitude,
                 weatherResponse.longitude,
                 weatherResponse.currently?.temperature?.roundToInt()?.toString() ?: "?",
@@ -40,10 +36,6 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
 
         _weather.value = result
     }
-
-    private fun getCurrentLatitude() = "9.6302"
-    private fun getCurrentLongitude() = "-84.2542"
-
 
     private fun log(message: String) {
         Log.d("WeatherViewModel", message)
