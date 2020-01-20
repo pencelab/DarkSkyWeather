@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if(!Places.isInitialized())
-            Places.initialize(applicationContext, "AIzaSyDPJ7QVSvSpDfigKuX6x5uiCq6AJdUVPQc")
+            Places.initialize(applicationContext, "AIzaSyDPJ7QVSvSpDfigKuX6x5uiCq6AJdUVPQc")//TODO Move API_KEY to a secure place (NDK?)
     }
 
 }

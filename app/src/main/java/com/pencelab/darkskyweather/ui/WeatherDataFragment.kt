@@ -1,7 +1,6 @@
 package com.pencelab.darkskyweather.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -99,10 +98,6 @@ class WeatherDataFragment : Fragment() {
     private fun hideErrorStateWidgets() {
         this.binding.imageViewErrorIcon.visibility = View.GONE
         this.binding.textViewErrorMessage.visibility = View.GONE
-    }
-
-    private fun log(message: String) {
-        Log.d("WeatherDataFragment", message)
     }
 
 }

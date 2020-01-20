@@ -1,13 +1,17 @@
 package com.pencelab.darkskyweather.business
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.pencelab.darkskyweather.repository.WeatherRepository
 import com.pencelab.darkskyweather.repository.model.*
+import com.pencelab.darkskyweather.utils.DefaultDispatcherProvider
+import com.pencelab.darkskyweather.utils.DispatcherProvider
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-class WeatherViewModel internal constructor(private val weatherRepository: WeatherRepository): ViewModel() {
+class WeatherViewModel internal constructor(
+    private val weatherRepository: WeatherRepository,
+    private val dispatchers: DispatcherProvider = DefaultDispatcherProvider()
+): ViewModel() {
 
     companion object {
         private const val DARKSKY_API_KEY = "cbb0a2ec980ab36a2811d0e3d2776a02"
@@ -17,7 +21,7 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
     val weather: LiveData<WeatherRequestState>
         get() = _weather
 
-    fun loadCurrentWeather(latitude: String, longitude: String) = viewModelScope.launch {
+    fun loadCurrentWeather(latitude: String, longitude: String) = viewModelScope.launch(this.dispatchers.main()) {
         _weather.value = WeatherLoading
 
         val result = try {
@@ -35,10 +39,6 @@ class WeatherViewModel internal constructor(private val weatherRepository: Weath
         }
 
         _weather.value = result
-    }
-
-    private fun log(message: String) {
-        Log.d("WeatherViewModel", message)
     }
 
 }

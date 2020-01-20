@@ -2,13 +2,8 @@ package com.pencelab.darkskyweather.repository
 
 import com.pencelab.darkskyweather.repository.source.network.NetworkService
 import com.pencelab.darkskyweather.repository.model.DarkSkyResponse
-import com.pencelab.darkskyweather.utils.DefaultDispatcherProvider
-import com.pencelab.darkskyweather.utils.DispatcherProvider
 
-class WeatherRepository constructor(
-    private val weatherService: NetworkService,
-    private val dispatchers: DispatcherProvider = DefaultDispatcherProvider()
-) {
+class WeatherRepository constructor(private val weatherService: NetworkService) {
 
     companion object {
 
