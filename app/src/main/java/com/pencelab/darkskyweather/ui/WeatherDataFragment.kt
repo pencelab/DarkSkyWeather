@@ -36,6 +36,7 @@ class WeatherDataFragment : Fragment() {
 
     private fun subscribeUi() {
         weatherViewModel.weather.observe(viewLifecycleOwner) { weatherRequestState ->
+            binding.constraintLayoutData.visibility = View.VISIBLE
             when(weatherRequestState) {
                 is WeatherResult -> {
                     binding.weatherResult = weatherRequestState

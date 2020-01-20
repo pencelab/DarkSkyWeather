@@ -59,8 +59,6 @@ class CoordinatesSetupFragment : Fragment() {
             loadCurrentWeather()
         }
 
-        loadCurrentWeather()
-
         return binding.root
     }
 

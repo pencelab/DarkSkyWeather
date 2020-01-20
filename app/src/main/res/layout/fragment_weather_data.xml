@@ -15,9 +15,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
+        android:visibility="gone"
         tools:context=".ui.WeatherDataFragment">
 
         <androidx.constraintlayout.widget.Guideline
